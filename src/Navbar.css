@@ -1,0 +1,20 @@
+.Navbar {
+	display: flex;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 50px;
+	background-color: #00a087;
+}
+
+.logo,
+.authorize-link {
+	margin: 0 40px;
+}
+
+.authorize-link {
+	margin-left: auto;
+}

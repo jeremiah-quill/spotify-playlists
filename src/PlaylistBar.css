@@ -1,0 +1,7 @@
+.PlaylistBar {
+	overflow-y: auto;
+	/* height: 90vh; */
+	width: 400px;
+	position: relative;
+	border: 2px solid black;
+}
