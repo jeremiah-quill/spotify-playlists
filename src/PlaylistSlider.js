@@ -31,7 +31,7 @@ class PlaylistSlider extends Component {
 	render() {
 		const { classes, playlist } = this.props;
 		const totalTrackCount = playlist.tracks.length;
-		const halfTrackCount = Math.ceil(playlist.level / 100 * playlist.tracks.length);
+		const halfTrackCount = Math.floor(playlist.level / 100 * playlist.tracks.length);
 
 		return (
 			<div className="PlaylistSlider">

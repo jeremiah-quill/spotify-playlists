@@ -11,7 +11,7 @@ class MixingBoard extends Component {
 	getNewTrackCount() {
 		if (this.props.chosenPlaylists.length) {
 			const allTrackTotals = this.props.chosenPlaylists.map((playlist) =>
-				Math.ceil(playlist.level / 100 * playlist.tracks.length)
+				Math.floor(playlist.level / 100 * playlist.tracks.length)
 			);
 			const sum = allTrackTotals.reduce((acc, currVal) => acc + currVal);
 			return sum;

@@ -190,7 +190,7 @@ class App extends Component {
 	// Take a playlist and randomly curate it based on # tracks chosen
 	curatePlaylist(playlist) {
 		const workingPlaylist = { ...playlist, tracks: [ ...playlist.tracks ] };
-		let curatedPlaylistNewTotal = Math.ceil(workingPlaylist.level / 100 * workingPlaylist.tracks.length);
+		let curatedPlaylistNewTotal = Math.floor(workingPlaylist.level / 100 * workingPlaylist.tracks.length);
 		const newPlaylist = [];
 		for (let i = 0; i < curatedPlaylistNewTotal; i++) {
 			let randomIndex = Math.floor(Math.random() * workingPlaylist.tracks.length);
