@@ -1,0 +1,30 @@
+.MixingBoard {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(15, 15, 15);
+}
+
+.MixingBoard-container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.MixingBoard-playlists {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* margin-bottom: 30px; */
+}
+
+.instructions-banner {
+	font-weight: bold;
+	/* color: #1db954; */
+	color: rgb(37, 211, 78);
+	font-size: 2rem;
+}

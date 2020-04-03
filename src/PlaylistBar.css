@@ -1,7 +1,62 @@
-.PlaylistBar {
-	overflow-y: auto;
-	/* height: 90vh; */
+.PlaylistBar-container {
 	width: 400px;
-	position: relative;
+	display: flex;
+	flex-direction: column;
 	border: 2px solid black;
+}
+
+.PlaylistBar {
+	position: relative;
+	height: 100%;
+	padding: 0px 15px;
+	overflow-y: auto;
+}
+
+.more-playlist-button {
+	text-align: center;
+	font-size: 14px;
+}
+
+.more-playlist-button {
+	background-color: #1db954;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 700;
+	letter-spacing: 1.76px;
+	text-transform: uppercase;
+	border: 2px solid transparent;
+	border-radius: 500px;
+	color: #fff;
+	-webkit-transition: all 33ms cubic-bezier(.3, 0, 0, 1);
+	transition: all 33ms cubic-bezier(.3, 0, 0, 1);
+	will-change: transform;
+	white-space: nowrap;
+	padding: 8px 34px;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	transition: all 33ms;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.more-playlist-button-container {
+	display: flex;
+	justify-content: center;
+}
+
+.more-playlist-button:hover {
+	background-color: rgb(47, 213, 102);
+	transform: scale(1.05);
+}
+
+.sidebar-branding {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+	margin-top: 10px;
+}
+
+.logo {
+	height: 50px;
 }
