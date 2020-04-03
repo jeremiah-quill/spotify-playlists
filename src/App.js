@@ -41,9 +41,9 @@ class App extends Component {
 		const authorizeURL = `https://accounts.spotify.com/authorize?client_id=${this.props
 			.clientID}&redirect_uri=${this.props.redirectURI}&scope=${this.props
 			.scope}&show_dialog=true&response_type=token`;
-		if (!this.state.access_token) {
-			window.location.href = authorizeURL;
-		}
+		// if (!this.state.access_token) {
+		// 	window.location.href = authorizeURL;
+		// }
 
 		// get user data
 		let userData = await this.getCurrentUser(this.state.access_token);
