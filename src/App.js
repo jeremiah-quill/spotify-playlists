@@ -38,12 +38,10 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
-		const authorizeURL = `https://accounts.spotify.com/authorize?client_id=${this.props
-			.clientID}&redirect_uri=${this.props.redirectURI}&scope=${this.props
-			.scope}&show_dialog=true&response_type=token`;
-		// if (!this.state.access_token) {
-		// 	window.location.href = authorizeURL;
-		// }
+		const authorizeURL = `https://accounts.spotify.com/authorize?client_id=9a9bc27e766d4e48bcd18dad29e5a877&redirect_uri=https://jeremiah-quill.github.io/spotify-playlists&scope=user-read-private playlist-read-private playlist-modify-public playlist-modify-private&show_dialog=true&response_type=token`;
+		if (!this.state.access_token) {
+			window.location.href = authorizeURL;
+		}
 
 		// get user data
 		let userData = await this.getCurrentUser(this.state.access_token);
