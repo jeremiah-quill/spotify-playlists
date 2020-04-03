@@ -190,7 +190,7 @@ class App extends Component {
 	// Take a playlist and randomly curate it based on # tracks chosen
 	curatePlaylist(playlist) {
 		const workingPlaylist = { ...playlist, tracks: [ ...playlist.tracks ] };
-		let curatedPlaylistNewTotal = workingPlaylist.level / 100 * workingPlaylist.tracks.length;
+		let curatedPlaylistNewTotal = Math.ceil(workingPlaylist.level / 100 * workingPlaylist.tracks.length);
 		const newPlaylist = [];
 		for (let i = 0; i < curatedPlaylistNewTotal; i++) {
 			let randomIndex = Math.floor(Math.random() * workingPlaylist.tracks.length);
@@ -219,8 +219,9 @@ class App extends Component {
 			// update tracksLeftToSend to see how many are left
 			tracksLeftToSend = tracksLeftToSend - nextSetOfTracks.length;
 			// update nextSetOfTracks to be the next set of tracks
-			startIndex = startIndex + endIndex;
-			endIndex = endIndex + tracksLeftToSend;
+			startIndex = startIndex + nextSetOfTracks.length;
+			// endIndex = endIndex + tracksLeftToSend;
+			endIndex = tracksLeftToSend > 100 ? endIndex + 100 : endIndex + tracksLeftToSend;
 			nextSetOfTracks = playlist.slice(startIndex, endIndex);
 		}
 	}
