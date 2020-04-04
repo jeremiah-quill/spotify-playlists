@@ -76,3 +76,19 @@ h3 {
 	right: 10px;
 	cursor: pointer;
 }
+
+.invalid-name-text {
+	font-size: .5rem;
+	color: red;
+	opacity: 0;
+	font-weight: bold;
+	margin-top: 3px;
+}
+
+.show-invalid {
+	opacity: 1;
+}
+
+.red-outline {
+	border: 1px solid red;
+}

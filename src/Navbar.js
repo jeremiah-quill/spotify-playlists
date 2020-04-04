@@ -12,7 +12,7 @@ class Navbar extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick() {
-		this.setState((currSt) => ({ isDropdown: !currSt.isDropdown }));
+		// this.setState((currSt) => ({ isDropdown: !currSt.isDropdown }));
 	}
 	render() {
 		return (
@@ -21,12 +21,12 @@ class Navbar extends Component {
 					<div onClick={this.handleClick} className="account-widget">
 						<PersonIcon className="userIcon" />
 						<span>{this.props.username}</span>
-						{this.state.isDropdown ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+						{/* {this.state.isDropdown ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
 						{this.state.isDropdown && (
 							<div className="dropdown-menu">
 								<div className="dropdown-item">dropdown item</div>
 							</div>
-						)}
+						)} */}
 					</div>
 				)}
 			</div>

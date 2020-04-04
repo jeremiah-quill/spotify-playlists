@@ -18,7 +18,8 @@
 	margin-right: 40px;
 	margin-left: auto;
 	display: flex;
-	background-color: rgba(0, 0, 0, .7);
+	/* background-color: rgba(0, 0, 0, .7); */
+	background-color: #282828;
 	border-radius: 23px;
 	height: 32px;
 	min-width: 32px;
@@ -32,19 +33,20 @@
 	-ms-flex-pack: center;
 	justify-content: center;
 	border: 0;
-	cursor: pointer;
+	/* cursor: pointer; */
 	color: #fff;
 	padding: 2px;
 }
 
-.account-widget:hover {
+/* .account-widget:hover {
 	background-color: #282828;
-}
+} */
 
 .account-widget span {
 	margin-left: 8px;
 	font-size: 12px;
 	font-weight: bold;
+	margin-right: 5px;
 }
 
 .account-menu {

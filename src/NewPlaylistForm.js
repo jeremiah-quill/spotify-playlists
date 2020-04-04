@@ -25,7 +25,7 @@ const styles = {
 class NewPlaylistForm extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { name: '', open: false, modalOpen: false };
+		this.state = { name: '', open: false, modalOpen: false, isInvalidName: false };
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.closeSnackbar = this.closeSnackbar.bind(this);
@@ -43,15 +43,23 @@ class NewPlaylistForm extends Component {
 		this.setState({ open: false });
 	}
 	handleClick(e) {
-		this.props.createPlaylist(this.state.name);
-		this.setState({ name: '', open: true, modalOpen: false });
-		e.preventDefault();
+		if (!this.state.name) {
+			this.setState({ isInvalidName: true });
+			setTimeout(() => {
+				this.setState({ isInvalidName: false });
+			}, 3000);
+		} else {
+			this.props.createPlaylist(this.state.name);
+			this.setState({ name: '', open: true, modalOpen: false });
+			e.preventDefault();
+		}
 	}
 	handleChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 	render() {
 		const { classes } = this.props;
+		const isInvalidName = this.state.isInvalidName;
 
 		return (
 			<div className="NewPlaylistForm">
@@ -84,8 +92,11 @@ class NewPlaylistForm extends Component {
 										value={this.state.name}
 										name="name"
 										type="text"
-										className="name-input"
+										className={`name-input ${isInvalidName && `red-outline`}`}
 									/>
+									<div className={`invalid-name-text ${isInvalidName && `show-invalid`}`}>
+										Please name your playlist
+									</div>
 									<button className="create-playlist-button" onClick={this.handleClick}>
 										Submit
 									</button>
