@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5c895b54292b8e48add76730ea78fa1f",
+    "revision": "0dfd468c92bd83bdc2f04803a7e795ee",
     "url": "/spotify-playlists/index.html"
   },
   {
-    "revision": "dd7d2747df7cc627d148",
-    "url": "/spotify-playlists/static/css/main.a8095b7e.chunk.css"
+    "revision": "5b255ce3ccedcf1b098d",
+    "url": "/spotify-playlists/static/css/main.314872c6.chunk.css"
   },
   {
-    "revision": "b42ff795eabe1bfbd3e8",
-    "url": "/spotify-playlists/static/js/2.b6bbb8a6.chunk.js"
+    "revision": "c85abd841165faab4652",
+    "url": "/spotify-playlists/static/js/2.2d5e589f.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/spotify-playlists/static/js/2.b6bbb8a6.chunk.js.LICENSE.txt"
+    "url": "/spotify-playlists/static/js/2.2d5e589f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dd7d2747df7cc627d148",
-    "url": "/spotify-playlists/static/js/main.4bd60543.chunk.js"
+    "revision": "5b255ce3ccedcf1b098d",
+    "url": "/spotify-playlists/static/js/main.7e37757a.chunk.js"
   },
   {
     "revision": "4f1e2d7bcc4565212baf",
