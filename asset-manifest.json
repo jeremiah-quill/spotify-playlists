@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.5b43772d.chunk.css",
-    "main.js": "/static/js/main.4fef2d39.chunk.js",
-    "main.js.map": "/static/js/main.4fef2d39.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.6d686c10.js",
-    "runtime-main.js.map": "/static/js/runtime-main.6d686c10.js.map",
-    "static/js/2.b8a80065.chunk.js": "/static/js/2.b8a80065.chunk.js",
-    "static/js/2.b8a80065.chunk.js.map": "/static/js/2.b8a80065.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.b033faae148b105d79ec6a0f0f6461a8.js": "/precache-manifest.b033faae148b105d79ec6a0f0f6461a8.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.5b43772d.chunk.css.map": "/static/css/main.5b43772d.chunk.css.map",
-    "static/js/2.b8a80065.chunk.js.LICENSE.txt": "/static/js/2.b8a80065.chunk.js.LICENSE.txt",
-    "static/media/spotify-icon-logo.png": "/static/media/spotify-icon-logo.11dc437a.png"
+    "main.css": "/spotify-playlists/static/css/main.5b43772d.chunk.css",
+    "main.js": "/spotify-playlists/static/js/main.5fd0a5d2.chunk.js",
+    "main.js.map": "/spotify-playlists/static/js/main.5fd0a5d2.chunk.js.map",
+    "runtime-main.js": "/spotify-playlists/static/js/runtime-main.54ecaaca.js",
+    "runtime-main.js.map": "/spotify-playlists/static/js/runtime-main.54ecaaca.js.map",
+    "static/js/2.b8a80065.chunk.js": "/spotify-playlists/static/js/2.b8a80065.chunk.js",
+    "static/js/2.b8a80065.chunk.js.map": "/spotify-playlists/static/js/2.b8a80065.chunk.js.map",
+    "index.html": "/spotify-playlists/index.html",
+    "precache-manifest.26ed9188d95f731a10d034bb529d3c6d.js": "/spotify-playlists/precache-manifest.26ed9188d95f731a10d034bb529d3c6d.js",
+    "service-worker.js": "/spotify-playlists/service-worker.js",
+    "static/css/main.5b43772d.chunk.css.map": "/spotify-playlists/static/css/main.5b43772d.chunk.css.map",
+    "static/js/2.b8a80065.chunk.js.LICENSE.txt": "/spotify-playlists/static/js/2.b8a80065.chunk.js.LICENSE.txt",
+    "static/media/spotify-icon-logo.png": "/spotify-playlists/static/media/spotify-icon-logo.11dc437a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6d686c10.js",
+    "static/js/runtime-main.54ecaaca.js",
     "static/js/2.b8a80065.chunk.js",
     "static/css/main.5b43772d.chunk.css",
-    "static/js/main.4fef2d39.chunk.js"
+    "static/js/main.5fd0a5d2.chunk.js"
   ]
 }
