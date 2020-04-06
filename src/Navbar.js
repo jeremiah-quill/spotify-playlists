@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import PersonIcon from '@material-ui/icons/Person';
 
 import './Navbar.css';

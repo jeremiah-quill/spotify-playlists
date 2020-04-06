@@ -14,6 +14,8 @@ class PlaylistBar extends Component {
 	}
 	render() {
 		const { playlists, addPlaylist, removePlaylist, chosenPlaylistIDs, isMorePlaylists, isLoading } = this.props;
+		const isButton = isMorePlaylists && playlists.length > 0;
+
 		return (
 			<div className="PlaylistBar-container">
 				<div className="sidebar-branding">
@@ -33,7 +35,7 @@ class PlaylistBar extends Component {
 									playlist={playlist}
 								/>
 							))}
-							{isMorePlaylists && (
+							{isButton && (
 								<div className="more-playlist-button-container">
 									<div onClick={this.handleClick} className="more-playlist-button">
 										More Playlists

@@ -4,13 +4,14 @@ import Navbar from './Navbar';
 import PlaylistBar from './PlaylistBar';
 import MixingBoard from './MixingBoard';
 import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
 import './App.css';
 
 class App extends Component {
 	static defaultProps = {
 		clientID: '9a9bc27e766d4e48bcd18dad29e5a877',
-		// redirectURI: 'http://localhost:3000',
-		redirectURI: 'https://jeremiah-quill.github.io/spotify-playlists',
+		redirectURI: 'http://localhost:3000',
+		// redirectURI: 'https://jeremiah-quill.github.io/spotify-playlists',
 		scope: 'user-read-private playlist-read-private playlist-modify-public playlist-modify-private',
 		maxPlaylists: 4
 	};
@@ -24,7 +25,8 @@ class App extends Component {
 			isLoadingPlaylists: true,
 			isLoadingNewPlaylist: false,
 			chosenPlaylists: [],
-			isMorePlaylists: ''
+			isMorePlaylists: '',
+			isError: ''
 		};
 		this.getHashParams = this.getHashParams.bind(this);
 		this.addPlaylist = this.addPlaylist.bind(this);
@@ -35,6 +37,7 @@ class App extends Component {
 		this.extractPlaylists = this.extractPlaylists.bind(this);
 		this.getTracks = this.getTracks.bind(this);
 		this.getAllTracks = this.getAllTracks.bind(this);
+		this.getCurrentUser = this.getCurrentUser.bind(this);
 	}
 
 	async componentDidMount() {
@@ -46,42 +49,57 @@ class App extends Component {
 		}
 
 		// get user data
-		let userData = await this.getCurrentUser(this.state.access_token);
-
-		// get playlists data
-		let playlistsData = await this.getPlaylists(
-			`https://api.spotify.com/v1/users/${userData.id}/playlists/?limit=20`
-		);
-
-		// extract tracks from playlists and build up objects to store in state
-		const playlists = await this.extractPlaylists(playlistsData);
-		this.setState({
-			playlists: playlists,
-			userData: userData,
-			isLoadingPlaylists: false,
-			isMorePlaylists: playlistsData.next
-		});
+		let userResponse = await this.getCurrentUser(this.state.access_token);
+		if (!userResponse.data) {
+			this.setState({
+				isError: `Error: ${userResponse.response.status}`
+			});
+		} else {
+			// get playlists data
+			let playlistsResponse = await this.getPlaylists(
+				`https://api.spotify.com/v1/users/${userResponse.data.id}/playlists/?limit=20`
+			);
+			if (!playlistsResponse.data) {
+				this.setState({
+					isError: `Error: ${playlistsResponse.response.status}`
+				});
+			} else {
+				// extract tracks from playlists and build up objects to store in state
+				const playlists = await this.extractPlaylists(playlistsResponse.data);
+				this.setState({
+					playlists: playlists,
+					userData: userResponse.data,
+					isLoadingPlaylists: false,
+					isMorePlaylists: playlistsResponse.data.next
+				});
+			}
+		}
 	}
 
 	async getCurrentUser(token) {
-		let res = await axios.get(`https://api.spotify.com/v1/me`, {
-			headers: {
-				Authorization: 'Bearer ' + token
-			}
-		});
-		console.log(res);
-		let userData = res.data;
-		return userData;
+		try {
+			let res = await axios.get(`https://api.spotify.com/v1/me`, {
+				headers: {
+					Authorization: 'Bearer ' + token
+				}
+			});
+			return res;
+		} catch (err) {
+			return err;
+		}
 	}
 
 	async getPlaylists(url) {
-		const res = await axios.get(url, {
-			headers: {
-				Authorization: 'Bearer ' + this.state.access_token
-			}
-		});
-		let playlistsData = res.data;
-		return playlistsData;
+		try {
+			const res = await axios.get(url, {
+				headers: {
+					Authorization: 'Bearer ' + this.state.access_token
+				}
+			});
+			return res;
+		} catch (err) {
+			return err;
+		}
 	}
 
 	async extractPlaylists(playlistsData) {
@@ -99,47 +117,53 @@ class App extends Component {
 		return playlists;
 	}
 
-	// getAllTracks uses recursion to call getTracks for as long as it takes until there is no "next" pagination
+	// call getTracks until keepGoing is false (when there is no newURL)
 	async getAllTracks(URL) {
 		let allTracks = [];
 		let keepGoing = true;
 		let newURL = URL;
 		while (keepGoing) {
-			let response = await this.getTracks(newURL);
-			for (let i = 0; i < response.data.items.length; i++) {
-				let track = {
-					name: response.data.items[i].track.name,
-					id: response.data.items[i].track.id,
-					artists: response.data.items[i].track.artists.map((artist) => ({
-						name: artist.name,
-						id: artist.id
-					}))
-				};
-				allTracks.push(track);
-			}
-			newURL = response.data.next;
-			if (!newURL) {
-				keepGoing = false;
-				return allTracks;
+			let res = await this.getTracks(newURL);
+			if (!res.data) {
+				return;
+			} else {
+				for (let i = 0; i < res.data.items.length; i++) {
+					let track = {
+						name: res.data.items[i].track.name,
+						id: res.data.items[i].track.id,
+						artists: res.data.items[i].track.artists.map((artist) => ({
+							name: artist.name,
+							id: artist.id
+						}))
+					};
+					allTracks.push(track);
+				}
+				newURL = res.data.next;
+				if (!newURL) {
+					keepGoing = false;
+					return allTracks;
+				}
 			}
 		}
 	}
 
 	async getTracks(URL) {
-		const tracks = await axios.get(`${URL}`, {
-			headers: {
-				Authorization: 'Bearer ' + this.state.access_token
-			}
-		});
-		return tracks;
+		try {
+			const res = await axios.get(`${URL}`, {
+				headers: {
+					Authorization: 'Bearer ' + this.state.access_token
+				}
+			});
+			return res;
+		} catch (err) {
+			return err;
+		}
 	}
 
 	addPlaylist(playlist) {
 		if (this.state.chosenPlaylists.length < this.props.maxPlaylists) {
 			const newPlaylist = { ...playlist, level: 50 };
 			this.setState((currSt) => ({ chosenPlaylists: [ ...currSt.chosenPlaylists, newPlaylist ] }));
-		} else {
-			// render breadcrumb saying `you can only add ${this.props.maxPlaylists} playlists` *********
 		}
 	}
 
@@ -185,8 +209,7 @@ class App extends Component {
 		let playlistsData = await this.getPlaylists(
 			`https://api.spotify.com/v1/users/${this.state.userData.id}/playlists`
 		);
-		const playlists = await this.extractPlaylists(playlistsData);
-
+		const playlists = await this.extractPlaylists(playlistsData.data);
 		this.setState({ playlists: playlists, isMorePlaylists: playlistsData.next, isLoadingNewPlaylist: false });
 	}
 
@@ -221,10 +244,11 @@ class App extends Component {
 			await this.addTracks(nextSetOfTracks, playlistID);
 			// update tracksLeftToSend to see how many are left
 			tracksLeftToSend = tracksLeftToSend - nextSetOfTracks.length;
-			// update nextSetOfTracks to be the next set of tracks
+			// update start index
 			startIndex = startIndex + nextSetOfTracks.length;
-			// endIndex = endIndex + tracksLeftToSend;
+			// update end index
 			endIndex = tracksLeftToSend > 100 ? endIndex + 100 : endIndex + tracksLeftToSend;
+			// create nextSetOfTracks
 			nextSetOfTracks = playlist.slice(startIndex, endIndex);
 		}
 	}
@@ -244,15 +268,15 @@ class App extends Component {
 	async findMorePlaylists() {
 		this.setState({ isLoadingNewPlaylist: true });
 		const playlistsResponse = await this.getPlaylists(this.state.isMorePlaylists);
-		const playlists = await this.extractPlaylists(playlistsResponse);
+		const playlists = await this.extractPlaylists(playlistsResponse.data);
 		this.setState((currSt) => ({
 			playlists: [ ...currSt.playlists, ...playlists ],
 			isLoadingNewPlaylist: false,
-			isMorePlaylists: playlistsResponse.next
+			isMorePlaylists: playlistsResponse.data.next
 		}));
 	}
 
-	// Shuffle function taken from stackoverflow (look into this)
+	// Shuffle function taken from stackoverflow
 	shuffle(array) {
 		var currentIndex = array.length,
 			temporaryValue,
@@ -270,7 +294,7 @@ class App extends Component {
 		return array;
 	}
 
-	// Extract hashParams so we can extract access_token
+	// Extract hashParams so we can extract access_token (taken from spotify API documentation examples)
 	getHashParams() {
 		var hashParams = {};
 		var e,
@@ -293,9 +317,12 @@ class App extends Component {
 			isLoadingPlaylists,
 			isLoadingNewPlaylist,
 			playlists,
-			isMorePlaylists
+			isMorePlaylists,
+			isError
 		} = this.state;
-		return isLoadingPlaylists ? (
+		return isError ? (
+			<ErrorMessage message={isError} />
+		) : isLoadingPlaylists ? (
 			<Loader />
 		) : (
 			<div className="App">
