@@ -10,8 +10,8 @@ import './App.css';
 class App extends Component {
 	static defaultProps = {
 		clientID: '9a9bc27e766d4e48bcd18dad29e5a877',
-		redirectURI: 'http://localhost:3000',
-		// redirectURI: 'https://jeremiah-quill.github.io/spotify-playlists',
+		// redirectURI: 'http://localhost:3000',
+		redirectURI: 'https://jeremiah-quill.github.io/spotify-playlists',
 		scope: 'user-read-private playlist-read-private playlist-modify-public playlist-modify-private',
 		maxPlaylists: 4
 	};
